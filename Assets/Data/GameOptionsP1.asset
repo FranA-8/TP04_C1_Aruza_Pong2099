@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f8626c1f59aee4893e4ab74f05b65a, type: 3}
+  m_Name: GameOptionsP1
+  m_EditorClassIdentifier: Assembly-CSharp::GameOptions
+  timer: 20
+  victoryPoints: 5
+  moveSpeed: 1000
+  rotateSpeed: 15
+  color: {r: 1, g: 1, b: 1, a: 1}
