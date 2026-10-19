@@ -2,6 +2,8 @@ using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// Error: el archivo se llama PlayerOneMovement.cs y la clase PlayerSpeed. Unity busca dentro de cada .cs una clase con el mismo nombre que el archivo; cuando no la encuentra, el componente no se puede agregar y los que ya estaban puestos aparecen como faltantes.
+// Renombrá la clase a PlayerOneMovement (o el archivo a PlayerSpeed.cs) desde el Project de Unity, para que el .meta viaje con el archivo. Acordate de que UiSettingsMenu.cs:75 también pide GetComponent<PlayerSpeed>().
 public class PlayerSpeed : MonoBehaviour
 {
     [SerializeField] private GameOptions gameOptions;
@@ -46,6 +48,8 @@ public class PlayerSpeed : MonoBehaviour
     {
             if (Input.GetKey(KeyCode.W))
             {
+                // Warning: AddForce ya integra el tiempo por dentro, no hay que multiplicar por Time.fixedDeltaTime. Como fixedDeltaTime vale 0.02, la fuerza queda dividida por cincuenta, y por eso terminás necesitando moveSpeed = 1000.
+                // Sacá el Time.fixedDeltaTime y bajá moveSpeed. Lo mismo en las cuatro llamadas de PlayerTwoMovement.cs:49-61.
                 rb.AddForce(new Vector2(0, moveSpeed * Time.fixedDeltaTime));
             }
             if (Input.GetKey(KeyCode.S))

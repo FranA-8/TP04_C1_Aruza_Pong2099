@@ -66,12 +66,16 @@ public class UiSettingsMenu : MonoBehaviour
     private void OnExitButtonClicked()
     {
         settingsMenuPanel.SetActive(false);
+        // Bug: en Gameplay.unity la instancia de Settings.prefab tiene mainMenuPanel en None, y este botón es el mismo que UiPauseMenu.backSettingsButton.
+        // Al apretar Back dentro de las opciones de la pausa se ejecutan los dos listeners y este tira NullReferenceException. Chequeá el null o, mejor, dejá que el back lo maneje solo UiPauseMenu.
         mainMenuPanel.SetActive(true);
     }
 
     private void OnSpeedSliderP1Changed(float value)
     {
         speedNumberP1.text = value.ToString("f2");
+        // Warning: GetComponent<PlayerSpeed>() se pide de nuevo cada vez que se mueve el slider, y lo mismo en OnSpeedSliderP2Changed.
+        // Cacheá los dos componentes en el Awake, al lado de playerOneSprite y playerTwoSprite, que eso sí lo hacés bien.
         PlayerOne.GetComponent<PlayerSpeed>().SetMoveSpeed(value);
     }
 
@@ -85,6 +89,8 @@ public class UiSettingsMenu : MonoBehaviour
     private void OnSizeSliderP1Changed(float value)
     {
         sizeNumberP1.text = value.ToString("f2");
+        // Warning: la escala queda con z en 0 (`new Vector3(value, 0.3f, 0f)`). Una escala 0 en cualquier eje puede romper el cálculo de normales y de colliders.
+        // Usá `new Vector3(value, 0.3f, 1f)`, o mejor todavía tocá solo el eje que querés cambiar.
         PlayerOne.transform.localScale = new Vector3(value,0.3f, 0f);
     }
 

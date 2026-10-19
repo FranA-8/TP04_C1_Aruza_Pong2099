@@ -1,3 +1,5 @@
+// Error: `using UnityEditor.Search;` en un script de runtime rompe el Build igual que el anterior, y encima el archivo no usa nada de ese namespace: lo agregó el autocompletado.
+// Borrá la línea.
 using UnityEditor.Search;
 using UnityEngine;
 
